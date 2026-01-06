@@ -3,144 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API-X | Hub de Comunidad</title>
+    <title>API-X | Hub Tecnológico</title>
+    
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root {
-            --ws-color: #25D366;
-            --ig-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            --yt-color: #FF0000;
-            --fb-color: #1877F2;
-            --dc-color: #5865F2;
-            --tk-color: #000000;
+            --ws: #25D366; --ig: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            --yt: #FF0000; --fb: #1877F2; --dc: #5865F2; --tk: #000;
         }
 
+        /* FONDO ANIMADO DE CIRCUITOS */
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #ffffff;
-            color: #1a1a1a;
             margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
+            overflow-x: hidden;
             display: flex;
             justify-content: center;
-            padding: 40px 20px;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background-image: 
+                radial-gradient(#e5e7eb 1px, transparent 1px),
+                radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            opacity: 0.5;
+        }
+
+        /* Círculos volando */
+        .circle {
+            position: absolute;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            animation: move 20s infinite linear;
+            z-index: -1;
+        }
+
+        @keyframes move {
+            from { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.5; }
+            to { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
         .container {
-            max-width: 450px;
-            width: 100%;
+            max-width: 500px;
+            width: 90%;
             text-align: center;
+            padding: 40px 0;
         }
 
-        h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 5px;
-            letter-spacing: -2px;
+        .logo-apix {
+            width: 180px;
+            margin-bottom: 20px;
         }
 
-        .invitation {
-            background: #f8f9fa;
+        /* ESTILO DEL MODELO 3D */
+        model-viewer {
+            width: 100%;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        .description {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
             padding: 25px;
             border-radius: 20px;
+            border: 1px solid #eee;
             margin-bottom: 30px;
-            line-height: 1.5;
-            border: 1px solid #eaeaea;
-            font-size: 1.05rem;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        .links-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .links-grid { display: flex; flex-direction: column; gap: 12px; }
 
         .btn {
-            display: flex;
-            align-items: center;
-            padding: 16px 20px;
-            text-decoration: none;
-            color: white;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            position: relative;
+            display: flex; align-items: center; padding: 16px;
+            text-decoration: none; color: white; font-weight: 600;
+            transition: 0.3s; border-radius: 12px;
         }
 
-        .btn:hover {
-            transform: scale(1.02);
-            filter: brightness(1.1);
-        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .btn i { width: 40px; font-size: 1.5rem; }
 
-        .btn i {
-            font-size: 1.5rem;
-            width: 30px;
-            margin-right: 15px;
-        }
+        /* Colores */
+        .btn-ws { background: var(--ws); border-radius: 30px; }
+        .btn-dc { background: var(--dc); }
+        .btn-tk { background: #000; border-right: 4px solid #ee1d52; border-left: 4px solid #69c9d0; }
+        .btn-ig { background: var(--ig); }
+        .btn-x { background: #000; }
+        .btn-yt { background: var(--yt); }
+        .btn-fb { background: var(--fb); }
 
-        /* Formas y Colores Específicos */
-        .btn-ws { background-color: var(--ws-color); border-radius: 50px; color: #fff; }
-        .btn-tk { 
-            background-color: var(--tk-color); 
-            border-radius: 8px;
-            box-shadow: 3px 0px 0px #ee1d52, -3px 0px 0px #69c9d0;
-        }
-        .btn-ig { background: var(--ig-gradient); border-radius: 15px; }
-        .btn-x  { background-color: #000; border-radius: 4px; }
-        .btn-yt { background-color: var(--yt-color); border-radius: 2px; }
-        .btn-fb { background-color: var(--fb-color); border-radius: 8px; }
-        .btn-dc { background-color: var(--dc-color); border-radius: 12px; }
-
-        span.tag {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            opacity: 0.8;
-            margin-bottom: 10px;
-            display: block;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
 
+    <div class="bg-animation" id="bg"></div>
+
     <div class="container">
-        <h1>API-X</h1>
-        
-        <div class="invitation">
-            🚀 <strong>¡Únete a la comunidad de creadores!</strong><br><br>
-            Si te apasiona el software, hardware, programación, diseño gráfico y modelado 3D, este es tu espacio. Aquí comparto mis proyectos y todos aprendemos de todos.
+        <img src="imagen_2025-12-19_000631778.png" alt="Logo API-X" class="logo-apix">
+
+        <model-viewer 
+            src="tierra-noche.glb" 
+            auto-rotate 
+            camera-controls 
+            shadow-intensity="1" 
+            disable-zoom>
+        </model-viewer>
+
+        <div class="description">
+            <h3>🚀 Sobre la Comunidad</h3>
+            <p>API-X es un ecosistema para mentes creativas. Aquí convergen entusiastas de los <strong>proyectos independientes</strong> en múltiples disciplinas:</p>
+            <ul style="padding-left: 20px;">
+                <li>💻 Programación y Software</li>
+                <li>⚙️ Hardware y Electrónica</li>
+                <li>🎨 Diseño Gráfico Digital</li>
+                <li>📐 Modelado y Animación 3D</li>
+            </ul>
+            <p>Nuestra misión es aprender colectivamente, resolver dudas y mostrar el proceso de desarrollo de proyectos reales.</p>
         </div>
 
-        <span class="tag">Nuestras Redes</span>
-        
-        <div class="links-list">
-            <a href="https://whatsapp.com/channel/0029VbBt6SdLdQejNjTghn0z" class="btn btn-ws" target="_blank">
-                <i class="fab fa-whatsapp"></i> Canal de WhatsApp
-            </a>
-
-            <a href="https://discord.gg/akhXkvy8uB" class="btn btn-dc" target="_blank">
-                <i class="fab fa-discord"></i> Comunidad Discord
-            </a>
-
-            <a href="https://www.tiktok.com/@joshuadavidgc?is_from_webapp=1&sender_device=pc" class="btn btn-tk" target="_blank">
-                <i class="fab fa-tiktok"></i> TikTok
-            </a>
-
-            <a href="https://www.instagram.com/joshda_api_x/" class="btn btn-ig" target="_blank">
-                <i class="fab fa-instagram"></i> Instagram
-            </a>
-
-            <a href="https://x.com/JoshDa_API_X" class="btn btn-x" target="_blank">
-                <i class="fab fa-x-twitter"></i> X / Twitter
-            </a>
-
-            <a href="https://www.youtube.com/@JoshDa_API_X" class="btn btn-yt" target="_blank">
-                <i class="fab fa-youtube"></i> YouTube
-            </a>
-
-            <a href="https://www.facebook.com/share/1GSdQmF7oX/" class="btn btn-fb" target="_blank">
-                <i class="fab fa-facebook-f"></i> Facebook
-            </a>
+        <div class="links-grid">
+            <a href="https://whatsapp.com/channel/0029VbBt6SdLdQejNjTghn0z" class="btn btn-ws"><i class="fab fa-whatsapp"></i> Canal de WhatsApp</a>
+            <a href="https://discord.gg/akhXkvy8uB" class="btn btn-dc"><i class="fab fa-discord"></i> Comunidad Discord</a>
+            <a href="https://www.tiktok.com/@joshuadavidgc" class="btn btn-tk"><i class="fab fa-tiktok"></i> TikTok</a>
+            <a href="https://www.instagram.com/joshda_api_x/" class="btn btn-ig"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://x.com/JoshDa_API_X" class="btn btn-x"><i class="fab fa-x-twitter"></i> X (Twitter)</a>
+            <a href="https://www.youtube.com/@JoshDa_API_X" class="btn btn-yt"><i class="fab fa-youtube"></i> YouTube</a>
+            <a href="https://www.facebook.com/share/1GSdQmF7oX/" class="btn btn-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
         </div>
     </div>
 
+    <script>
+        // Generador de círculos volando
+        const bg = document.getElementById('bg');
+        for (let i = 0; i < 15; i++) {
+            const circle = document.createElement('div');
+            circle.className = 'circle';
+            const size = Math.random() * 50 + 10 + 'px';
+            circle.style.width = size;
+            circle.style.height = size;
+            circle.style.left = Math.random() * 100 + 'vw';
+            circle.style.animationDelay = Math.random() * 20 + 's';
+            circle.style.animationDuration = Math.random() * 10 + 10 + 's';
+            bg.appendChild(circle);
+        }
+    </script>
 </body>
 </html>
