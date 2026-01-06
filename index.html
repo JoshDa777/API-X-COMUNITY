@@ -12,7 +12,7 @@
         :root {
             --ws: #25D366; --ig: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
             --yt: #FF0000; --fb: #1877F2; --dc: #5865F2; --tk: #000;
-            --brand-blue: #001f3f; /* Azul Oscuro para el título */
+            --brand-blue: #001f3f; 
         }
 
         body {
@@ -25,32 +25,28 @@
             justify-content: center;
         }
 
-        /* FONDO ANIMADO DE CIRCUITOS (Simulación con puntos y líneas) */
-        .bg-animation {
+        /* FONDO DE CÍRCULOS AZULES FLOTANTES */
+        .bg-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background-image: 
-                radial-gradient(#d1d5db 1px, transparent 1px),
-                radial-gradient(#d1d5db 1px, transparent 1px);
-            background-size: 50px 50px;
-            background-position: 0 0, 25px 25px;
-            opacity: 0.4;
+            background: #ffffff;
         }
 
         .circle {
             position: absolute;
-            background: rgba(0, 31, 63, 0.05);
+            bottom: -100px; /* Salen desde abajo del todo */
+            background: rgba(0, 122, 255, 0.15); /* Azul translúcido */
             border-radius: 50%;
-            animation: move 25s infinite linear;
+            animation: floatUp 15s infinite ease-in;
             z-index: -1;
         }
 
-        @keyframes move {
-            from { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.3; }
-            80% { opacity: 0.3; }
-            to { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
         }
 
         .container {
@@ -58,42 +54,38 @@
             width: 90%;
             text-align: center;
             padding: 40px 0;
+            position: relative;
         }
 
-        /* LOGO Y TÍTULO */
-        .logo-apix {
-            width: 150px;
-            height: auto;
-            margin-bottom: 10px;
-        }
+        .logo-apix { width: 150px; margin-bottom: 5px; }
 
         .main-title {
             color: var(--brand-blue);
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 900;
-            margin: 0 0 20px 0;
-            letter-spacing: 4px;
+            margin: 0 0 15px 0;
+            letter-spacing: 5px;
             text-transform: uppercase;
         }
 
         model-viewer {
             width: 100%;
-            height: 320px;
+            height: 300px;
             margin: 0 auto;
         }
 
         .description {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
             padding: 25px;
             border-radius: 24px;
-            border: 1px solid #eee;
+            border: 1px solid rgba(0, 31, 63, 0.1);
             margin-bottom: 30px;
             text-align: left;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            box-shadow: 0 15px 35px rgba(0, 31, 63, 0.05);
         }
 
-        .description h3 { color: var(--brand-blue); margin-top: 0; }
+        .description h3 { color: var(--brand-blue); margin-top: 0; font-size: 1.4rem; }
 
         .links-grid { display: flex; flex-direction: column; gap: 12px; }
 
@@ -101,26 +93,26 @@
             display: flex; align-items: center; padding: 18px;
             text-decoration: none; color: white; font-weight: 700;
             transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            border-radius: 14px;
+            border-radius: 15px;
         }
 
-        .btn:hover { transform: scale(1.03); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-        .btn i { width: 35px; font-size: 1.6rem; margin-right: 10px; text-align: center; }
+        .btn:hover { transform: scale(1.04); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .btn i { width: 40px; font-size: 1.6rem; margin-right: 10px; text-align: center; }
 
-        /* Colores y Formas */
-        .btn-ws { background: var(--ws); border-radius: 40px; }
-        .btn-dc { background: var(--dc); border-radius: 12px; }
-        .btn-tk { background: #000; border-right: 5px solid #ee1d52; border-left: 5px solid #69c9d0; }
+        /* Estilos de botones */
+        .btn-ws { background: var(--ws); border-radius: 50px; }
+        .btn-dc { background: var(--dc); }
+        .btn-tk { background: #000; border-right: 4px solid #ee1d52; border-left: 4px solid #69c9d0; }
         .btn-ig { background: var(--ig); }
-        .btn-x  { background: #000; border-radius: 6px; }
-        .btn-yt { background: var(--yt); border-radius: 4px; }
-        .btn-fb { background: var(--fb); border-radius: 10px; }
+        .btn-x  { background: #000; border-radius: 4px; }
+        .btn-yt { background: var(--yt); }
+        .btn-fb { background: var(--fb); }
 
     </style>
 </head>
 <body>
 
-    <div class="bg-animation" id="bg"></div>
+    <div class="bg-container" id="bg"></div>
 
     <div class="container">
         <img src="imagen_2025-12-19_000631778.png" alt="Logo" class="logo-apix">
@@ -130,9 +122,8 @@
         <model-viewer 
             src="tierra-noche.glb" 
             auto-rotate 
-            rotation-speed="0.5"
+            rotation-speed="0.8"
             camera-controls 
-            auto-rotate-delay="0"
             interaction-prompt="none"
             shadow-intensity="1" 
             disable-zoom>
@@ -140,13 +131,13 @@
 
         <div class="description">
             <h3>🚀 Comunidad de Desarrollo</h3>
-            <p>Bienvenidos a <strong>API-X</strong>, un espacio dedicado a la innovación técnica y creativa. Compartimos conocimientos y progreso en:</p>
+            <p><strong>API-X</strong> es el centro de reunión para creadores e innovadores. Un espacio dedicado a potenciar tus habilidades en:</p>
             <ul style="list-style: none; padding-left: 5px;">
-                <li>🔹 <strong>Software:</strong> Programación y algoritmos.</li>
-                <li>🔹 <strong>Hardware:</strong> Electrónica y prototipado.</li>
-                <li>🔹 <strong>Diseño:</strong> Gráficos y Modelado 3D profesional.</li>
+                <li>💻 <strong>Software:</strong> Desarrollo de apps y programación pura.</li>
+                <li>⚙️ <strong>Hardware:</strong> Prototipado físico y electrónica.</li>
+                <li>🎨 <strong>Diseño y 3D:</strong> Modelado profesional y arte digital.</li>
             </ul>
-            <p>Aquí todos aportamos para crecer como desarrolladores independientes.</p>
+            <p>Únete para ver mis proyectos personales y compartir el conocimiento con toda la comunidad.</p>
         </div>
 
         <div class="links-grid">
@@ -161,17 +152,25 @@
     </div>
 
     <script>
-        // Animación de círculos de fondo
+        // Crear burbujas azules dinámicas
         const bg = document.getElementById('bg');
-        for (let i = 0; i < 12; i++) {
+        const colors = ['rgba(0, 122, 255, 0.1)', 'rgba(0, 31, 63, 0.15)', 'rgba(88, 101, 242, 0.1)'];
+        
+        for (let i = 0; i < 20; i++) {
             const circle = document.createElement('div');
             circle.className = 'circle';
-            const size = Math.random() * 60 + 20 + 'px';
+            
+            const size = Math.random() * 80 + 20 + 'px';
             circle.style.width = size;
             circle.style.height = size;
+            
             circle.style.left = Math.random() * 100 + 'vw';
+            circle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Tiempos aleatorios para que no salgan todas a la vez
             circle.style.animationDelay = Math.random() * 15 + 's';
-            circle.style.animationDuration = Math.random() * 10 + 15 + 's';
+            circle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            
             bg.appendChild(circle);
         }
     </script>
