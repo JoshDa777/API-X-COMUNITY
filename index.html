@@ -3,108 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API-X | Hub Tecnológico</title>
+    <title>API-X | Comunidad Indie</title>
     
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
+            --brand-blue: #001f3f;
+            --tech-blue-light: #00a8ff;
             --ws: #25D366; --ig: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
             --yt: #FF0000; --fb: #1877F2; --dc: #5865F2; --tk: #000;
-            --brand-blue: #001f3f; 
         }
 
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: #ffffff;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            overflow-x: hidden;
-            display: flex;
-            justify-content: center;
+            font-family: 'Quicksand', sans-serif;
+            color: #333;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh; overflow-x: hidden;
         }
 
-        /* FONDO DE CÍRCULOS AZULES FLOTANTES */
-        .bg-container {
+        /* --- Círculos Flotantes Notorios --- */
+        #circles-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: #ffffff;
+            z-index: -1; pointer-events: none;
         }
 
         .circle {
             position: absolute;
-            bottom: -100px; /* Salen desde abajo del todo */
-            background: rgba(0, 122, 255, 0.15); /* Azul translúcido */
+            display: block;
+            list-style: none;
+            animation: animate linear infinite;
+            bottom: -150px;
             border-radius: 50%;
-            animation: floatUp 15s infinite ease-in;
-            z-index: -1;
+            /* Sombra para que se noten sobre el fondo blanco */
+            box-shadow: 0 4px 10px rgba(0, 31, 63, 0.2);
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 0; }
-            10% { opacity: 0.4; }
-            90% { opacity: 0.2; }
-            100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+        @keyframes animate {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-1300px) rotate(720deg); opacity: 0; }
         }
 
         .container {
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            padding: 40px 0;
-            position: relative;
+            z-index: 1;
+            width: 90%; max-width: 550px;
+            text-align: center; padding: 40px 0;
         }
 
-        .logo-apix { width: 150px; margin-bottom: 5px; }
+        .logo-apix { width: 160px; margin-bottom: 5px; }
 
         .main-title {
             color: var(--brand-blue);
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin: 0 0 15px 0;
-            letter-spacing: 5px;
+            font-size: 3.5rem; font-weight: 700;
+            margin: 0 0 10px 0; letter-spacing: 5px;
             text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 1);
         }
 
-        model-viewer {
-            width: 100%;
-            height: 300px;
-            margin: 0 auto;
-        }
+        model-viewer { width: 100%; height: 320px; margin: 0 auto; }
 
         .description {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            padding: 25px;
-            border-radius: 24px;
-            border: 1px solid rgba(0, 31, 63, 0.1);
-            margin-bottom: 30px;
-            text-align: left;
-            box-shadow: 0 15px 35px rgba(0, 31, 63, 0.05);
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px);
+            padding: 25px; border-radius: 30px;
+            border: 2px solid rgba(0, 31, 63, 0.1);
+            text-align: left; margin: 20px 0 40px 0;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
         }
 
-        .description h3 { color: var(--brand-blue); margin-top: 0; font-size: 1.4rem; }
+        .description h3 { color: var(--brand-blue); margin-top: 0; text-align: center; }
 
-        .links-grid { display: flex; flex-direction: column; gap: 12px; }
+        .links-grid { display: flex; flex-direction: column; gap: 14px; }
 
         .btn {
             display: flex; align-items: center; padding: 18px;
-            text-decoration: none; color: white; font-weight: 700;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            border-radius: 15px;
+            text-decoration: none; color: white; font-weight: bold;
+            transition: 0.3s; border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .btn:hover { transform: scale(1.04); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .btn i { width: 40px; font-size: 1.6rem; margin-right: 10px; text-align: center; }
+        .btn:hover { transform: scale(1.05); }
+        .btn i { width: 40px; font-size: 1.6rem; margin-right: 15px; text-align: center; }
 
-        /* Estilos de botones */
         .btn-ws { background: var(--ws); border-radius: 50px; }
         .btn-dc { background: var(--dc); }
-        .btn-tk { background: #000; border-right: 4px solid #ee1d52; border-left: 4px solid #69c9d0; }
+        .btn-tk { background: #000; border-left: 5px solid #69c9d0; border-right: 5px solid #ee1d52; }
         .btn-ig { background: var(--ig); }
-        .btn-x  { background: #000; border-radius: 4px; }
+        .btn-x  { background: #000; border-radius: 6px; }
         .btn-yt { background: var(--yt); }
         .btn-fb { background: var(--fb); }
 
@@ -112,32 +104,29 @@
 </head>
 <body>
 
-    <div class="bg-container" id="bg"></div>
+    <div id="circles-container"></div>
 
     <div class="container">
-        <img src="imagen_2025-12-19_000631778.png" alt="Logo" class="logo-apix">
-        
+        <img src="imagen_2025-12-19_000631778.png" alt="Logo API-X" class="logo-apix">
         <h1 class="main-title">API-X</h1>
 
         <model-viewer 
             src="tierra-noche.glb" 
-            auto-rotate 
-            rotation-speed="0.8"
-            camera-controls 
-            interaction-prompt="none"
-            shadow-intensity="1" 
-            disable-zoom>
+            auto-rotate rotation-speed="0.6"
+            camera-controls interaction-prompt="none"
+            shadow-intensity="1" disable-zoom>
         </model-viewer>
 
         <div class="description">
-            <h3>🚀 Comunidad de Desarrollo</h3>
-            <p><strong>API-X</strong> es el centro de reunión para creadores e innovadores. Un espacio dedicado a potenciar tus habilidades en:</p>
-            <ul style="list-style: none; padding-left: 5px;">
-                <li>💻 <strong>Software:</strong> Desarrollo de apps y programación pura.</li>
-                <li>⚙️ <strong>Hardware:</strong> Prototipado físico y electrónica.</li>
-                <li>🎨 <strong>Diseño y 3D:</strong> Modelado profesional y arte digital.</li>
+            <h3>🚀 Comunidad de Desarrollo Indie</h3>
+            <p>¡Hola! Soy JoshDa. Esta es una <strong>pequeña comunidad de desarrollo independiente</strong> para aficionados y entusiastas.</p>
+            <p>No somos un entorno profesional; somos un grupo de personas a las que nos apasiona "cacharrear" y crear por diversión. Aquí todos aportamos y nos enseñamos sobre:</p>
+            <ul style="padding-left: 20px;">
+                <li>💻 Programación de software independiente.</li>
+                <li>⚙️ Hardware y electrónica casera.</li>
+                <li>🎨 Diseño gráfico y modelado 3D.</li>
             </ul>
-            <p>Únete para ver mis proyectos personales y compartir el conocimiento con toda la comunidad.</p>
+            <p>Si tienes dudas o quieres mostrar tus avances, ¡únete! Estaré mostrándoles mis proyectos personales por aquí.</p>
         </div>
 
         <div class="links-grid">
@@ -145,34 +134,46 @@
             <a href="https://discord.gg/akhXkvy8uB" class="btn btn-dc"><i class="fab fa-discord"></i> Comunidad Discord</a>
             <a href="https://www.tiktok.com/@joshuadavidgc" class="btn btn-tk"><i class="fab fa-tiktok"></i> TikTok</a>
             <a href="https://www.instagram.com/joshda_api_x/" class="btn btn-ig"><i class="fab fa-instagram"></i> Instagram</a>
-            <a href="https://x.com/JoshDa_API_X" class="btn btn-x"><i class="fab fa-x-twitter"></i> X / Twitter</a>
+            <a href="https://x.com/JoshDa_API_X" class="btn btn-x"><i class="fab fa-x-twitter"></i> X (Twitter)</a>
             <a href="https://www.youtube.com/@JoshDa_API_X" class="btn btn-yt"><i class="fab fa-youtube"></i> YouTube</a>
             <a href="https://www.facebook.com/share/1GSdQmF7oX/" class="btn btn-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
         </div>
     </div>
 
     <script>
-        // Crear burbujas azules dinámicas
-        const bg = document.getElementById('bg');
-        const colors = ['rgba(0, 122, 255, 0.1)', 'rgba(0, 31, 63, 0.15)', 'rgba(88, 101, 242, 0.1)'];
-        
-        for (let i = 0; i < 20; i++) {
-            const circle = document.createElement('div');
-            circle.className = 'circle';
+        function createCircles() {
+            const container = document.getElementById('circles-container');
+            const count = 80; // Aumentamos la cantidad significativamente
             
-            const size = Math.random() * 80 + 20 + 'px';
-            circle.style.width = size;
-            circle.style.height = size;
-            
-            circle.style.left = Math.random() * 100 + 'vw';
-            circle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            
-            // Tiempos aleatorios para que no salgan todas a la vez
-            circle.style.animationDelay = Math.random() * 15 + 's';
-            circle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            
-            bg.appendChild(circle);
+            for (let i = 0; i < count; i++) {
+                const circle = document.createElement('div');
+                circle.className = 'circle';
+                
+                const size = Math.random() * 80 + 20; 
+                const left = Math.random() * 100;
+                const duration = Math.random() * 10 + 7; 
+                const delay = Math.random() * 20;
+
+                circle.style.width = `${size}px`;
+                circle.style.height = `${size}px`;
+                circle.style.left = `${left}%`;
+                circle.style.animationDuration = `${duration}s`;
+                circle.style.animationDelay = `${delay}s`;
+
+                // Colores más notorios (Blancos y Azules API-X)
+                const colorType = Math.random();
+                if (colorType > 0.6) {
+                    circle.style.background = "rgba(255, 255, 255, 0.9)"; // Blanco
+                } else if (colorType > 0.3) {
+                    circle.style.background = "rgba(0, 168, 255, 0.7)"; // Azul Tech
+                } else {
+                    circle.style.background = "rgba(0, 31, 63, 0.6)";   // Azul Oscuro
+                }
+
+                container.appendChild(circle);
+            }
         }
+        window.onload = createCircles;
     </script>
 </body>
 </html>
